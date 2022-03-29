@@ -12,52 +12,50 @@
 
 <script language="javascript" type="text/javascript">
     const positions = [
-        { left: 250, top:   0, },
-        { left: 180, top:  25, },
-        { left: 330, top:  25, },
-        { left: 250, top:  50, },
-
-        { left:  70, top: 100, },
-        { left:   0, top: 125, },
-        { left: 150, top: 125, },
-        { left:  70, top: 150, },
-
-        { left: 420, top: 100, },
-        { left: 340, top: 125, },
-        { left: 490, top: 125, },
-        { left: 420, top: 150, },
-
-        { left: 250, top: 200, },
-        { left: 180, top: 225, },
-        { left: 330, top: 225, },
-        { left: 250, top: 250, },
+        { left: 170, top:   0, },
+        { left:   0, top: 100, },
+        { left: 340, top: 100, },
+        { left: 170, top: 200, },
     ];
-    const virtues = [
-        { name: "", },
-        { name: "慈悲⇔デスパイス", },
-        { name: "誠実⇔デシート", },
-        { name: "名誉⇔シェイム", },
-        { name: "謙譲⇔Pride", },
-        { name: "正義⇔ロング", },
-        { name: "献身⇔コブトス", },
-        { name: "霊性⇔ヒスロス", },
-        { name: "武勇⇔ダスタード", },
+    const offsets = [
+        { left:  70, top:   0, },
+        { left:   0, top:  25, },
+        { left: 150, top:  25, },
+        { left:  70, top:  50, },
     ];
 
-    root = document.getElementById("root");
-    positions.forEach(item => {
-        div = document.createElement("tree" + positions.indexOf(item));
-        div.style.position = "absolute";
-        div.style.left = item.left + "px";
-        div.style.top = item.top + "px";
+    function createVirtueElement(div) {
+        const virtues = [
+            { name: "", },
+            { name: "慈悲⇔デスパイス", },
+            { name: "誠実⇔デシート", },
+            { name: "名誉⇔シェイム", },
+            { name: "謙譲⇔Pride", },
+            { name: "正義⇔ロング", },
+            { name: "献身⇔コブトス", },
+            { name: "霊性⇔ヒスロス", },
+            { name: "武勇⇔ダスタード", },
+        ];
+
         select = document.createElement("select");
         virtues.forEach(item => {
             option = document.createElement("option");
             option.text = item.name;
             select.appendChild(option);
         });
-        root.appendChild(div);
         div.appendChild(select);
+    }
+
+    root = document.getElementById("root");
+    positions.forEach(function(position, iposition) {
+        offsets.forEach(function(offset, ioffset) {
+            div = document.createElement("tree" + iposition + ioffset);
+            div.style.position = "absolute";
+            div.style.left = position.left + offset.left + "px";
+            div.style.top = position.top + offset.top + "px";
+            createVirtueElement(div);
+            root.appendChild(div);
+        });
     });
 </script>
 
